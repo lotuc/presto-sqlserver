@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'presto-sqlserver'
+version = '0.166'
+
+description = ""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+
+    maven { url "http://repo.maven.apache.org/maven2" }
+    flatDir {
+        dirs "lib"
+    }
+}
+
+ext.prestoVersion = '0.166'
+ext.airliftVersion = '0.128'
+ext.airliftSliceVersion = '0.21'
+ext.guavaVersion = '18.0'
+ext.guiceVersion = '4.0-beta5'
+ext.validationApiVersion = '1.1.0.Final'
+ext.log4jVersion = '1.2.17'
+ext.javaxInjectVersion = '1'
+ext.jacksonVersion = '2.6.0-rc2'
+
+dependencies {
+    compile("com.facebook.presto:presto-base-jdbc:${prestoVersion}")
+    compile("com.facebook.presto:presto-spi:${prestoVersion}")
+
+    compile "io.airlift:units:${airliftVersion}"
+    compile "io.airlift:configuration:${airliftVersion}"
+    compile("io.airlift:slice:${airliftSliceVersion}")
+
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile "com.google.inject:guice:${guiceVersion}"
+
+    compile("javax.inject:javax.inject:${javaxInjectVersion}")
+    compile "javax.validation:validation-api:${validationApiVersion}"
+
+    compile("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
+    compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+
+    compile "log4j:log4j:${log4jVersion}"
+
+    compile name: "sqljdbc42"
+}
